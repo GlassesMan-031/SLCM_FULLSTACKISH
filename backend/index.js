@@ -1,18 +1,19 @@
-const express = require("express");
-const path = require("path");
-const dotenv = require("dotenv");
-const { Client } = require("pg");
-
-dotenv.config();
+const express = require("express"),
+  path = require("path");
 
 const app = express();
+const dotenv = require("dotenv"),
+  { Client } = require("pg");
+dotenv.config();
 
-// Serve static files from the frontend dist directory
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
+app.get("/api", (_request, response) => {
+  response.send({ hello: "World" });
+});
 
-// API routes
-app.get("/api", (_req, res) => {
-  res.send({ hello: "World" });
+app.use(express.static(path.join(path.resolve(), "dist")));
+
+app.listen(3000, () => {
+  console.log("Redo på http://localhost:3000/");
 });
 
 const client = new Client({
@@ -21,17 +22,8 @@ const client = new Client({
 
 client.connect();
 
-app.get("/cities", async (_req, res) => {
-  const { rows } = await client.query("SELECT * FROM cities");
-  res.send(rows);
-});
+app.get("/cities", async (_request, response) => {
+  const { rows } = await client.query("SELECT * FROM cities", []);
 
-// Catch-all route to send index.html for frontend routing
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/dist", "index.html"));
-});
-
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}/`);
+  response.send(rows);
 });
