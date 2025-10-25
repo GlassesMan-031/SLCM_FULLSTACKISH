@@ -30,3 +30,23 @@ app.get("/cities", async (_request, response) => {
 
   response.send(rows);
 });
+
+app.get("/products", async (_req, res) => {
+  try {
+    const { rows } = await client.query("SELECT * FROM products", []);
+    res.send(rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ error: "Failed to fetch products" });
+  }
+});
+
+app.get("/sales", async (_req, res) => {
+  try {
+    const { rows } = await client.query("SELECT * FROM sales_view");
+    res.send(rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ error: "Failed to fetch sales" });
+  }
+});
