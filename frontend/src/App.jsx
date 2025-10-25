@@ -1,28 +1,21 @@
 import "./App.css";
-import { Heading, Highlight, Box, Table } from "@chakra-ui/react";
-
-// dummy data array
-const items = [
-  { id: 1, name: "Laptop", category: "Electronics", price: 999.99 },
-  { id: 2, name: "Coffee Maker", category: "Home Appliances", price: 49.99 },
-  { id: 3, name: "Desk Chair", category: "Furniture", price: 150.0 },
-  { id: 4, name: "Smartphone", category: "Electronics", price: 799.99 },
-  { id: 5, name: "Headphones", category: "Accessories", price: 199.99 },
-];
+import { Heading, Highlight, Box, SimpleGrid } from "@chakra-ui/react";
+import CitiesTable from "./components/CitiesTable";
+import ProductsTable from "./components/ProductsTable";
+import SalesTable from "./components/SalesTable";
 
 function App() {
   return (
     <>
-      {/* boxar för heading */}
       <Box textAlign="center" m="4">
-        <Heading size="3xl" letterspacing="tight">
+        <Heading size="3xl" letterSpacing="tight">
           <Highlight query="populating the page" styles={{ color: "teal.600" }}>
             Let's begin populating the page with content
           </Highlight>
         </Heading>
       </Box>
 
-      <Box textAlign="center">
+      <Box textAlign="center" mb="6">
         <Highlight
           query="Three Lists"
           styles={{ fontWeight: "semibold", color: "teal.600" }}
@@ -31,27 +24,12 @@ function App() {
           into them
         </Highlight>
       </Box>
-      {/* bryt upp table i component - det blir mindre rörigt så */}
-      {/* första table */}
-      <Table.Root size="sm">
-        <Table.Caption>Product inventory and pricing information</Table.Caption>
-        <Table.Header>
-          <Table.Row>
-            <Table.ColumnHeader>Product</Table.ColumnHeader>
-            <Table.ColumnHeader>Category</Table.ColumnHeader>
-            <Table.ColumnHeader textAlign="end">Price</Table.ColumnHeader>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {items.map((item) => (
-            <Table.Row key={item.id}>
-              <Table.Cell>{item.name}</Table.Cell>
-              <Table.Cell>{item.category}</Table.Cell>
-              <Table.Cell textAlign="end">{item.price}</Table.Cell>
-            </Table.Row>
-          ))}
-        </Table.Body>
-      </Table.Root>
+
+      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8} px={6}>
+        <CitiesTable />
+        <ProductsTable />
+        <SalesTable />
+      </SimpleGrid>
     </>
   );
 }

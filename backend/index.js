@@ -6,6 +6,9 @@ const dotenv = require("dotenv"),
   { Client } = require("pg");
 dotenv.config();
 
+const cors = require("cors");
+app.use(cors());
+
 app.get("/api", (_request, response) => {
   response.send({ hello: "World" });
 });
