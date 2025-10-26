@@ -15,3 +15,5 @@ Det mest relevanta exemplet jag kan tänka mig i sammanhanget av den här
 inlämningen är typ server monitorering, där man kollar nätverksprestanda och
 hur mycket CPU servern tar upp för att kunna se om ens hårdvara/mjukvara
 i kombination räcker till mot ens kundbemötande.
+
+https://slcm-fullstackish.onrender.com/
