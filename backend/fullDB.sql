@@ -1,15 +1,14 @@
-
 CREATE TABLE cities (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     population INT
 );
 
-
 INSERT INTO cities (id, name, population) VALUES
-(1, 'Stockholm', 1372565),
-(2, 'Göteborg', 549839),
-(4, 'Malmö', 560560);
+(1, 'Stockholm', 990261),
+(2, 'Gothenburg', 674529),
+(3, 'Malmoe', 365644),
+(4, 'Oslo', 724300);
 
 
 CREATE TABLE products (
@@ -25,6 +24,7 @@ INSERT INTO products (id, name, price) VALUES
 (4, 'Smartphone', 799.99),
 (5, 'Headphones', 199.99);
 
+
 CREATE TABLE sales (
     id SERIAL PRIMARY KEY,
     city_id INT NOT NULL REFERENCES cities(id),
@@ -33,11 +33,11 @@ CREATE TABLE sales (
 );
 
 INSERT INTO sales (city_id, product_id, price) VALUES
-(1, 1, 999.99),  -- Laptop sold in Stockholm
-(2, 2, 49.99),   -- Coffee Maker sold in Göteborg
-(4, 3, 150.00),  -- Desk Chair sold in Malmö
-(1, 4, 799.99),  -- Smartphone sold in Stockholm
-(2, 5, 199.99);  -- Headphones sold in Göteborg
+(1, 1, 999.99),
+(2, 2, 49.99),
+(3, 3, 150.00),
+(4, 4, 799.99),
+(1, 5, 199.99);
 
 
 CREATE OR REPLACE VIEW sales_view AS
