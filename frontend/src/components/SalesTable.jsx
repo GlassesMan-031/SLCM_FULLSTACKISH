@@ -6,7 +6,7 @@ function SalesTable() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3000/sales")
+    fetch("/api/sales")
       .then((res) => res.json())
       .then((data) => {
         setSales(data);

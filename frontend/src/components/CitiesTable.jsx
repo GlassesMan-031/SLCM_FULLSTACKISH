@@ -6,7 +6,7 @@ function CitiesTable() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3000/cities")
+    fetch("/api/cities")
       .then((res) => res.json())
       .then((data) => {
         setCities(data);

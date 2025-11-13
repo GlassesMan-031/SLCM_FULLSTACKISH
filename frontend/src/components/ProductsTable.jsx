@@ -1,4 +1,3 @@
-// src/components/ProductsTable.jsx
 import { useEffect, useState } from "react";
 import RenderTable from "./TableRender";
 
@@ -7,7 +6,7 @@ function ProductsTable() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3000/products")
+    fetch("/api/products")
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
