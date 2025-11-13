@@ -15,23 +15,24 @@ app.get("/api", (_request, response) => {
 
 app.use(express.static(path.join(path.resolve(), "dist")));
 
-app.listen(3000, () => {
-  console.log("Backend står redo på http://localhost:3000/");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Backend running on port ${PORT}`);
 });
 
 const client = new Client({
   connectionString: process.env.PGURI,
+  ssl: { rejectUnauthorized: false },
 });
 
 client.connect();
 
-app.get("/cities", async (_request, response) => {
+app.get("/api/cities", async (_request, response) => {
   const { rows } = await client.query("SELECT * FROM cities", []);
-
   response.send(rows);
 });
 
-app.get("/products", async (_req, res) => {
+app.get("/api/products", async (_req, res) => {
   try {
     const { rows } = await client.query("SELECT * FROM products", []);
     res.send(rows);
@@ -41,7 +42,7 @@ app.get("/products", async (_req, res) => {
   }
 });
 
-app.get("/sales", async (_req, res) => {
+app.get("/api/sales", async (_req, res) => {
   try {
     const { rows } = await client.query("SELECT * FROM sales_view");
     res.send(rows);
